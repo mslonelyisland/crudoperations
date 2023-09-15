@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+  
+{% block title %}Add New Employee Records{% endblock title %}
+  
+{% block content %}
+<div class="col-md-12" style="margin-top: 20px;">
+    <form method="POST" class="post-form" action="/update/{{order.id}}">  
+    {% csrf_token %}  
+    <div class="container">   
+        <div class="col-12">  
+            <h3>Update Details</h3> 
+            <h6>Customer Details</h6>
+        </div> 
+        <div class="row mb-3">
+             <div class="col-md-1 mb-3">
+                 <label>Order ID:</label>
+                 <input type="text" class="form-control" name="id" id="id_id" required maxlength="20" value="{{ order.id }}"/>
+             </div>
+             <div class="col-md-8 mb-3">
+                 <label>Customer's Name:</label>
+                 <input type="text" class="form-control" name="name" id="id_name" required maxlength="100" value="{{ order.name }}"/>
+             </div>
+             <div class="col-md-3 mb-3">
+                 <label>Email Address:</label>
+                 <input type="text" class="form-control" name="email" id="id_email" required maxlength="100" value="{{ order.email }}"/>
+             </div>
+             <div class="col-md-2 mb-3">
+                <label>Phone Number:</label>
+                <input type="text" class="form-control" name="phone" id="id_phone" required maxlength="100" value="{{ order.phone }}"/>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Address:</label>
+                <input type="text" class="form-control" name="address" id="id_address" required maxlength="100" value="{{ order.address }}"/>
+            </div>
+         </div>
+              <!-- Other form fields go here -->
+
+        <h5>Order Details</h5>  
+         <div class="row mb-3">
+            <div class="col-md-2 mb-3">
+                <label for="{{ form.status.id_for_label }}">Order Status:</label >
+                <select class="form-control" name="status" id="id_status" required maxlength="100" value="{{ order.status }}">
+                    <option value="Pending" {% if order.status == "Pending" %}selected{% endif %}>Pending</option>
+                    <option value="Completed" {% if order.status == "Completed" %}selected{% endif %}>Completed</option>
+                    <option value="Delivered" {% if order.status == "Delivered" %}selected{% endif %}>Delivered</option>
+                    <option value="Shipped" {% if order.status == "Shipped" %}selected{% endif %}>Shipped</option>
+                </select>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="{{ form.paid.id_for_label }}">Paid in:</label>
+                <select class="form-control" name="paid" id="id_paid" required maxlength="100" value="{{ order.paid }}">
+                    <option value="Partial Payment" {% if order.paid == "Partial Payment" %}selected{% endif %}>Partial Payment</option>
+                    <option value="Full Payment" {% if order.paid == "Full Payment" %}selected{% endif %}>Full Payment</option>
+                </select>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="{{ form.payment.id_for_label }}">Mode of Payment:</label>
+                <select class="form-control" name="payment" id="id_payment" required maxlength="100" value="{{ order.payment }}">
+                    <option value="Bank Transfer" {% if order.payment == "Bank Transfer" %}selected{% endif %}>Bank Transfer</option>
+                    <option value="Paypal" {% if order.payment == "Paypal" %}selected{% endif %}>Paypal</option>
+                    <option value="Gcash" {% if order.payment == "Gcash" %}selected{% endif %}>Gcash</option>
+                    <option value="Paymaya" {% if order.payment == "Paymaya" %}selected{% endif %}>Paymaya</option>
+                </select>
+            </div>
+            <!-- <div class="col-md-2 mb-3">
+                <label>Phone Number:</label>
+                <input type="text" class="form-control" name="phone" id="id_phone" required maxlength="100" value="{{ order.phone }}"/>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Address:</label>
+                <input type="text" class="form-control" name="address" id="id_address" required maxlength="100" value="{{ order.address }}"/>
+            </div> -->
+        </div>
+        <!-- Notes/Comments and Number of Figures on the same row -->
+        <div class="row mb-3">
+            <div class="col-md-6 mb-3">
+                <label>Notes/Comments:</label>
+                <textarea class="form-control" name="notes" id="id_notes" rows="4" required>{{ order.notes }}</textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Number of Figures:</label>
+                <input type="number" class="form-control" name="figures" id="id_figures" required maxlength="20" value="{{ order.figures }}"/>
+            </div>
+        </div>
+        <div class="mb-3"> 
+            <button type="submit" class="btn btn-success  btn-dark mb-3">Update</button>  
+        </div> 
+    </div>  
+    </form>  
+{% endblock content %}

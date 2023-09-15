@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+  
+{% block title %}Order Records{% endblock title %}
+  
+{% block content %}
+ <div class="col-md-12" style="margin-top: 20px;">
+        <span><a href="/addnew" class="btn btn-dark mb-3" id ="addbtn">Add New Order</a></span>  
+        <div class="table-responsive" style="margin-top: 10px;">
+        <table id="bootstrapdatatable" class="table table-hover text-center" width="100%" style="margin-top: 20px;" >
+        <thead  class="table-dark" >
+      	  <!-- <th> <input type="checkbox" id="checkall" /> </th> -->
+          <!-- <th> <input type="checkbox" id="checkall" /> </th> -->
+      	      <th> Order ID</th>
+      	      <th> Customer's Name</th>
+     		  <th scope="col"> Email Address </th>
+    		  <th scope="col"> Order Status</th>
+    		  <th scope="col"> Phone Number</th>
+    		  <th scope="col"> Address </th>
+    	 	  <th scope="col"> Edit </th>
+	         <th scope="col"> Delete </th>
+    	</thead>
+        <tbody>
+        {% for order in orders %}  
+            <tr>  
+	            <!-- <td><input type="checkbox" class="checkthis"/> </td> -->
+	            <td>{{ order.id }}</td>
+	            <td>{{ order.name }}</td>
+	            <td>{{ order.email }}</td>
+	            <td>{{ order.status }}</td>
+	            <td>{{ order.phone }}</td>
+	            <td>{{ order.address }}</td>
+	            <td><a href="/edit/{{ order.id }}" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a></td>
+	            <td><a href="/delete/{{ order.id }}" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a></td>
+            </tr>  
+        {% endfor %} 
+        </tbody>
+        </table>
+        </div>
+    </div>
+{% endblock content %}
